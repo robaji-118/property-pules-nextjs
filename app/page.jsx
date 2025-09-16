@@ -1,5 +1,14 @@
-const HomePage = () => {
-  return <div className="text-2xl">HomePage</div>;
-};
+import Link from 'next/link'
+import Hero from '@/components/Hero'
+import InfoBoxes from '@/components/InfoBoxes'
 
-export default HomePage;
+const HomePage = () => {
+  return (
+    <div>
+      <Hero></Hero>
+      <InfoBoxes></InfoBoxes>
+    </div>
+  )
+}
+
+export default HomePage
