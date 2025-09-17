@@ -19,7 +19,7 @@ const InfoBoxes = () => {
             link: '/properties/add',
             backgroundColor: 'bg-blue-500'
           }}>
-            List your properties and reach potential tenants, rent as an Airbnb or
+            List your properties and reach potential tenants, rent as an Airbnb or  
             long term.
           </InfoBox>
         </div>
