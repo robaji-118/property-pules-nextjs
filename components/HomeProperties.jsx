@@ -11,7 +11,7 @@ const HomeProperties = async () => {
     .limit(3)
     .lean();
 
-console.log("Fetched Properties:", recentProperties);
+  console.log("Fetched Properties:", recentProperties);
 
   return (
     <>

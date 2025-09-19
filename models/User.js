@@ -3,8 +3,8 @@ const { Schema, model, models } = require('mongoose');
 const userSchema = new Schema({
     email:{
         type: String,
+        unique: [true, 'Email is already exist'],
         required: [true, `email is required`],
-        unique: true,
     },
 
     username:{
@@ -12,10 +12,10 @@ const userSchema = new Schema({
         required: [true, `username is required`],
     },
 
-    images:{
+    image:{
         type: String,
     },
-
+    
     bookmarks:[
         {
             type: Schema.Types.ObjectId,
@@ -26,5 +26,5 @@ const userSchema = new Schema({
     timestamps: true
 })
 
-const User = models.User || model(`User`, userSchema);
+const User = models.User || model(`User`, UserSchema);
 export default User;

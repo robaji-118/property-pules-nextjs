@@ -1,6 +1,6 @@
 const { Schema, model, models } = require("mongoose");
 
-const propertySchema = new Schema(
+const PropertySchema = new Schema(
   {
     owner: {
       type: Schema.Types.ObjectId,
@@ -23,10 +23,10 @@ const propertySchema = new Schema(
     },
 
     location: {
-      street: { type: String },
-      city: { type: String },
-      state: { type: String },
-      zip: { type: String },
+      street: String,
+      city: String,
+      state: String,
+      zipcode: String,
     },
 
     beds: {
@@ -78,5 +78,6 @@ const propertySchema = new Schema(
   }
 );
 
-const Property = models.Property || model("Property", propertySchema);
+const Property = models.Property || model("Property", PropertySchema);
 export default Property;
+ 
