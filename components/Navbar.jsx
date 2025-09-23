@@ -5,12 +5,13 @@ import logo from '@/assets/images/logo-white.png'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import profileDefault from '@/assets/images/profile.png'
-import { FaGoogle } from 'react-icons/fa'
+import { FaGithub } from 'react-icons/fa'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 
 const Navbar = () => {
   const { data: session } = useSession()
   console.log(session)
+  const profileImage = session?.user?.image || profileDefault
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
@@ -113,7 +114,7 @@ const Navbar = () => {
                       onClick={() => signIn(provider.id)}
                       className='flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'
                     >
-                      <FaGoogle className='text-white mr-2' />
+                      <FaGithub className='text-white mr-2' />
                       <span>Login or Register</span>
                     </button>
                   ))}
@@ -165,7 +166,9 @@ const Navbar = () => {
                     <span className='sr-only'>Open user menu</span>
                     <Image
                       className='h-8 w-8 rounded-full'
-                      src={profileDefault}
+                      src={profileImage}
+                      width={40}
+                      height={40}
                       alt=''
                     />
                   </button>
@@ -204,6 +207,10 @@ const Navbar = () => {
                       role='menuitem'
                       tabIndex={-1}
                       id='user-menu-item-2'
+                      onClick={() =>{ 
+                        setIsProfileMenuOpen(false)
+                        signOut()
+                      }}
                     >
                       Sign Out
                     </button>
