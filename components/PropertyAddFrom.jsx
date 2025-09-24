@@ -1,6 +1,6 @@
 import addProperty from "@/app/actions/addProperty"
 
-const PropertyAddFrom = () => {
+const PropertyAddForm = () => {
   return (
     <form action={addProperty} className='max-w-lg m-auto'>
       <h2 className='text-3xl text-center font-semibold mb-6'>Add Property</h2>
@@ -327,7 +327,7 @@ const PropertyAddFrom = () => {
         <input
           type='text'
           id='seller_name'
-          name='seller_info.name.'
+          name='seller_info.name' 
           className='border rounded w-full py-2 px-3'
           placeholder='Name'
         />
@@ -385,4 +385,4 @@ const PropertyAddFrom = () => {
   )
 }
 
-export default PropertyAddFrom
+export default PropertyAddForm
