@@ -1,7 +1,10 @@
 import '@/assets/styles/global.css'
 import Navbar from '@/components/Navbar'
 import AuthProvider from '@/components/AuthProvider'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Footer from '@/components/Footer'
+
 
 export const metadata = {
   title: `Property Pulse`,
@@ -21,6 +24,7 @@ const MainLayout = ({ children }) => {
             <Navbar></Navbar>
             {children}
             <Footer></Footer>
+            <ToastContainer></ToastContainer>
           </main>
         </body>
       </html>
