@@ -15,7 +15,6 @@
 
 # next.js
 /.next/
-/_theme_files/
 /out/
 
 # production
