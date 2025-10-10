@@ -7,81 +7,77 @@ import deleteMessage from "@/app/actions/deleteMessage"
 import { useGlobalContext } from "@/context/GlobalContext"
 
 const MessageCard = ({ message }) => {
-    const [isRead, setIsRead] = useState(message.read)
-    const [isDeleted, setIsDeleted] = useState(false)
+  const [isRead, setIsRead] = useState(message.read)
+  const [isDeleted, setIsDeleted] = useState(false)
+  const { setUnreadCount } = useGlobalContext()
 
-    const {setUnreadCount} = useGlobalContext()
+  const handleReadClick = async () => {
+    const read = await markMessageAsRead(message._id)
+    setIsRead(read)
+    setUnreadCount((prev) => (read ? prev - 1 : prev + 1))
+    toast.success(`Marked as ${read ? 'Read' : 'New'}`)
+  }
 
-    const handleReadClick = async () => {
-        const read = await markMessageAsRead(message._id)
+  const handleDeleteClick = async () => {
+    await deleteMessage(message._id)
+    setIsDeleted(true)
+    setUnreadCount((prev) => (isRead ? prev : prev - 1))
+    toast.success('Delete Message Successfully')
+  }
 
-        setIsRead(read);
-        setUnreadCount((prev) => (read ? prevCount - 1 : prevCount + 1))
-        toast.success(`Marked as ${read ? 'Read' : 'New'}`)
-    }
-
-    const handleDeleteclick = async () => {
-        await deletedMessage(message._id)
-        setIsDeleted(true);
-        setUnreadCount((prev) => (isRead ? prevCount : prevCount - 1))
-        toast.success('pesan terhaopus')
-    }
-
-    if (isDeleted) {
-        return <p>Delete Message</p>
-    }
-
+  if (isDeleted) {
+    return <p>Message deleted</p>
+  }
 
   return (
     <div className='relative bg-white p-4 rounded-md shadow-md border border-gray-200'>
-        {!isRead && (
-            <div className="absolute top-2 right-2 bg-yellow-500 text-white px-2 py-1 rounded-md">
-                New
-            </div>
-        )
+      {!isRead && (
+        <div className="absolute top-2 right-2 bg-yellow-500 text-white px-2 py-1 rounded-md">
+          New
+        </div>
+      )}
 
-        }
-        <h2 className="text-xl mb-4">
-            <span className="font-bold">
-                Porperty Inquiry : 
-            </span>{' '}
-            {message.property.name}
-        </h2>
-        <p className="text-gray-700">
-            {message.body}
-        </p>
+      <h2 className="text-xl mb-4">
+        <span className="font-bold">Property Inquiry:</span>{' '}
+        {message.property?.name || 'Unknown Property'}
+      </h2>
 
-        <ul className="mt-4">
-            <li>
-                <strong>
-                    Reply Email :
-                </strong> {' '}
-                <a href={`mailto:${message.email}`}className='text-blue-500'>
-                    {message.email}
-                </a>
-            </li>
+      <p className="text-gray-700">{message.body}</p>
 
-            <li>
-                <strong>
-                    Reply Phone :
-                </strong> {' '}
-                <a href={`tel:${message.phone}`}className='text-blue-500'>
-                    {message.phone}
-                </a>
-            </li>
+      <ul className="mt-4">
+        <li>
+          <strong>Reply Email:</strong>{' '}
+          <a href={`mailto:${message.email}`} className='text-blue-500'>
+            {message.email}
+          </a>
+        </li>
 
-            <li>
-                <strong>Received :</strong>{' '}
-                {new Date(message.createdAt.toLocalString())}
-            </li>
-        </ul>
+        <li>
+          <strong>Reply Phone:</strong>{' '}
+          <a href={`tel:${message.phone}`} className='text-blue-500'>
+            {message.phone}
+          </a>
+        </li>
 
-        <button onClick={handleReadClick} className="mt-4 mr-3 bg-blue-500 text-white py-1 px-3 rounded-md">
-            {isRead ? 'Mark As New' : 'Mark As Read'}
-        </button>
-        <button onClick={handleDeleteclick} className="mt-4 bg-red-500 text-white py-1 px-3 rounded-md">
-            Delete
-        </button>
+        <li>
+          <strong>Received:</strong>{' '}
+          {new Date(message.createdAt).toLocaleString()}
+        </li>
+      </ul>
+
+      <button
+        onClick={handleReadClick}
+        className="mt-4 mr-3 bg-blue-500 text-white py-1 px-3 rounded-md"
+      >
+        {isRead ? 'Mark As New' : 'Mark As Read'}
+      </button>
+
+      <button
+        onClick={handleDeleteClick}
+        className="mt-4 bg-red-500 text-white py-1 px-3 rounded-md"
+      >
+        Delete
+      </button>
     </div>
   )
 }
