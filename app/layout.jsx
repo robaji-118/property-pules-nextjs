@@ -1,10 +1,12 @@
-import '@/assets/styles/global.css'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import AuthProvider from '@/components/AuthProvider'
 import { ToastContainer } from 'react-toastify'
 import { GlobalProvider } from '@/context/GlobalContext'
 import 'react-toastify/dist/ReactToastify.css'
-import Footer from '@/components/Footer'
+import '@/assets/styles/global.css'
+import 'photoswipe/dist/photoswipe.css'
+
 
 
 export const metadata = {
